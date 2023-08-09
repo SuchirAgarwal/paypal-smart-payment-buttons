@@ -120,7 +120,7 @@ const executeServiceWorker = (releaseHash: string, serviceWorker: string) => {
 }
 
 export function registerServiceWorker({ dumbledoreCurrentReleaseHash, dumbledoreServiceWorker }: RegisterServiceWorkerParams) {
-    if ('serviceWorker' in navigator === false) {
+    if ('serviceWorker' in navigator === false || 'BroadcastChannel' in window === false) {
         getLogger().info(`${ LOG_PREFIX }NOT_SUPPORTED`);
         return;
     }
