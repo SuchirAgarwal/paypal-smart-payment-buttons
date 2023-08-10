@@ -122,7 +122,10 @@ const executeServiceWorker = (releaseHash: string, serviceWorker: string) => {
 export function registerServiceWorker({ dumbledoreCurrentReleaseHash, dumbledoreServiceWorker }: RegisterServiceWorkerParams) {
     // Browser eligibility criteria for SW registration
     if ('serviceWorker' in navigator === false || 'BroadcastChannel' in window === false) {
-        getLogger().info(`${ LOG_PREFIX }NOT_SUPPORTED`);
+        getLogger().info(`${ LOG_PREFIX }NOT_SUPPORTED`, {
+          serviceWorker: Boolean('serviceWorker' in navigator),
+          BroadcastChannel: Boolean('BroadcastChannel' in window),
+        });
         return;
     }
     if (!dumbledoreCurrentReleaseHash) {
