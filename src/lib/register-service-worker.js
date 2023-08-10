@@ -38,7 +38,6 @@ const requestSwLogs = () => {
 };
 
 const startBroadCastChannel = () => {
-    // eslint-disable-next-line compat/compat
     broadcastChannel = new BroadcastChannel(LOGS_CHANNEL_NAME);
 };
 
