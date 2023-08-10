@@ -72,7 +72,7 @@ const unRegisterButtonHandlers = () => {
 const startRegistration = (swUrl) => {
     // eslint-disable-next-line compat/compat
     navigator.serviceWorker
-        ?.register('https://localhost.paypal.com:8443/dumbledore-service-worker.js?releaseHash=43968c7e8195936f0b5e4467e9cc71cea8df9152', { scope: SW_SCOPE })
+        ?.register(swUrl, { scope: SW_SCOPE })
         .then((registration) => {
 
             getLogger().info(`${ LOG_PREFIX }REGISTERED`);
@@ -120,6 +120,7 @@ const executeServiceWorker = (releaseHash: string, serviceWorker: string) => {
 }
 
 export function registerServiceWorker({ dumbledoreCurrentReleaseHash, dumbledoreServiceWorker }: RegisterServiceWorkerParams) {
+    // Browser eligibility criteria for SW registration
     if ('serviceWorker' in navigator === false || 'BroadcastChannel' in window === false) {
         getLogger().info(`${ LOG_PREFIX }NOT_SUPPORTED`);
         return;
